@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Web", "TaskManager.Web\TaskManager.Web.csproj", "{015F984F-6710-4965-B960-8D4D70CE2E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Web.Tests", "TaskManager.Web.Tests\TaskManager.Web.Tests.csproj", "{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzExtention", "QuartzExtention\QuartzExtention.csproj", "{92CFDCA1-408C-4288-B5D1-6F614EEE9397}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{015F984F-6710-4965-B960-8D4D70CE2E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015F984F-6710-4965-B960-8D4D70CE2E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015F984F-6710-4965-B960-8D4D70CE2E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015F984F-6710-4965-B960-8D4D70CE2E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92CFDCA1-408C-4288-B5D1-6F614EEE9397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92CFDCA1-408C-4288-B5D1-6F614EEE9397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92CFDCA1-408C-4288-B5D1-6F614EEE9397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92CFDCA1-408C-4288-B5D1-6F614EEE9397}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
