@@ -1,4 +1,6 @@
-namespace QuartzExtention
+using TaskManager.Core.Entities;
+
+namespace TaskManager.Core
 {
     ///<summary>
     ///任务执行控制器
@@ -11,7 +13,7 @@ namespace QuartzExtention
         ///</summary>
         ///<param name="id">任务Id</param>
         ///<returns>任务详细信息</returns>
-        TaskDetail GetTask(int id);
+        TaskDetailEntity GetTask(int id);
         ///<summary>
         ///重启所有任务
         ///</summary>
@@ -38,7 +40,7 @@ namespace QuartzExtention
         ///更新任务在调度器中的状态
         ///</summary>
         ///<param name="task">任务详细信息</param>
-        void Update(TaskDetail task);
+        void Update(TaskDetailEntity task);
     }
 }
 

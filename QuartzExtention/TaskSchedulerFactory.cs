@@ -1,4 +1,4 @@
-namespace QuartzExtention
+namespace TaskManager.Core
 {
     public static class TaskSchedulerFactory
     {

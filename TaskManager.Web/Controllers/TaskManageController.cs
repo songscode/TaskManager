@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace TaskManager.Web.Controllers
 {
-    public class LocalTaskController : Controller
+    public class TaskManageController : Controller
     {
         // GET: TaskDetails
-        public ActionResult TaskDetails()
+        public ActionResult LocalTaskList()
         {
             return View();
         }

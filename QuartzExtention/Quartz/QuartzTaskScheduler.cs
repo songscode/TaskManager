@@ -4,10 +4,10 @@ using System.Linq;
 using Common.Logging;
 using Quartz;
 using Quartz.Impl;
-using QuartzExtention;
-using QuartzExtention.Quartz;
+using TaskManager.Core.Entities;
+using TaskManager.Core.Services;
 
-namespace Infrastructure.Tasks.Quartz
+namespace TaskManager.Core.Quartz
 {
     ///<summary>
     ///用以管理Quartz任务调度相关的操作
@@ -15,7 +15,7 @@ namespace Infrastructure.Tasks.Quartz
     ///2013/7/13 15:01:09  
     public class QuartzTaskScheduler : ITaskScheduler
     {
-        private static List<TaskDetail> _taskDetails;
+        private static List<TaskDetailEntity> _taskDetails;
 
         ///<summary>
         ///构造器
@@ -31,11 +31,11 @@ namespace Infrastructure.Tasks.Quartz
         /// </summary>
         public QuartzTaskScheduler(RunAtServer runAtServer) : this()
         {
-            Func<TaskDetail, bool> predicate = null;
+            Func<TaskDetailEntity, bool> predicate = null;
             if (_taskDetails != null)
             {
                 predicate = n => n.RunAtServer == runAtServer;
-                _taskDetails = _taskDetails.Where<TaskDetail>(predicate).ToList<TaskDetail>();
+                _taskDetails = _taskDetails.Where<TaskDetailEntity>(predicate).ToList<TaskDetailEntity>();
             }
         }
         /// <summary>
@@ -53,9 +53,9 @@ namespace Infrastructure.Tasks.Quartz
         ///</summary>
         ///<param name="id">Id</param>
         ///<returns>任务详细信息</returns>
-        public TaskDetail GetTask(int id)
+        public TaskDetailEntity GetTask(int id)
         {
-            return _taskDetails.FirstOrDefault<TaskDetail>(n => (n.Id == id));
+            return _taskDetails.FirstOrDefault<TaskDetailEntity>(n => (n.Id == id));
         }
 
         ///<summary>
@@ -73,7 +73,7 @@ namespace Infrastructure.Tasks.Quartz
         ///<param name="id">任务Id</param>
         public void Run(int id)
         {
-            TaskDetail task = this.GetTask(id);
+            TaskDetailEntity task = this.GetTask(id);
             this.Run(task);
         }
 
@@ -81,7 +81,7 @@ namespace Infrastructure.Tasks.Quartz
         ///运行单个任务
         ///</summary>
         ///<param name="task">要运行的任务</param>
-        public void Run(TaskDetail task)
+        public void Run(TaskDetailEntity task)
         {
             if (task != null)
             {
@@ -114,7 +114,7 @@ namespace Infrastructure.Tasks.Quartz
         ///<remarks>将当前需要需要ResumeContinue为true的任务记录，以便应用程序重启后检查是否需要立即执行</remarks>
         public void SaveTaskStatus()
         {
-            foreach (TaskDetail detail in _taskDetails)
+            foreach (TaskDetailEntity detail in _taskDetails)
             {
                 new TaskService().SaveTaskStatus(detail);
             }
@@ -125,11 +125,11 @@ namespace Infrastructure.Tasks.Quartz
         ///</summary>
         public void Start()
         {
-            if (_taskDetails.Count<TaskDetail>() != 0)
+            if (_taskDetails.Count<TaskDetailEntity>() != 0)
             {
                 new TaskService();
                 IScheduler scheduler = new StdSchedulerFactory().GetScheduler();
-                foreach (TaskDetail detail in _taskDetails)
+                foreach (TaskDetailEntity detail in _taskDetails)
                 {
                     if (detail.Enabled)
                     {
@@ -174,7 +174,7 @@ namespace Infrastructure.Tasks.Quartz
         ///更新任务在调度器中的状态
         ///</summary>
         ///<param name="task">任务详细信息</param>
-        public void Update(TaskDetail task)
+        public void Update(TaskDetailEntity task)
         {
             if (task != null)
             {

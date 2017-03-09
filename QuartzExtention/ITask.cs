@@ -1,4 +1,6 @@
-namespace QuartzExtention
+using TaskManager.Core.Entities;
+
+namespace TaskManager.Core
 {
     ///<summary>
     ///用于注册任务的接口
@@ -10,7 +12,7 @@ namespace QuartzExtention
         ///执行任务的方法
         ///</summary>
         ///<param name=" taskDetail">任务配置状态信息</param>
-        void Execute(TaskDetail taskDetail = null);
+        void Execute(TaskDetailEntity taskDetail = null);
     }
 }
 

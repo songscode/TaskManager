@@ -1,8 +1,10 @@
 using System;
 using Common.Logging;
 using Quartz;
+using TaskManager.Core.Entities;
+using TaskManager.Core.Services;
 
-namespace QuartzExtention.Quartz
+namespace TaskManager.Core.Quartz
 {
     ///<summary>
     ///Quartz任务实现
@@ -17,7 +19,7 @@ namespace QuartzExtention.Quartz
         public void Execute(IJobExecutionContext context)
         {
             int @int = context.JobDetail.JobDataMap.GetInt("Id");
-            TaskDetail task = TaskSchedulerFactory.GetScheduler().GetTask(@int);
+            TaskDetailEntity task = TaskSchedulerFactory.GetScheduler().GetTask(@int);
             if (task == null)
             {
                 throw new ArgumentException("Not found task ：" + task.Name);

@@ -1,4 +1,4 @@
-namespace QuartzExtention
+namespace TaskManager.Core
 {
     ///<summary>
     ///任务频率

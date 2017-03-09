@@ -139,7 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocalTaskController.cs" />
+    <Compile Include="Controllers\TaskManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,7 +180,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LocalTask\TaskDetails.cshtml" />
+    <Content Include="Views\TaskManage\LocalTaskList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -193,6 +193,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuartzExtention\TaskManager.Core.csproj">
+      <Project>{92cfdca1-408c-4288-b5d1-6f614eee9397}</Project>
+      <Name>TaskManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskManager.Common\TaskManager.Common.csproj">
+      <Project>{47277686-11c1-4a3e-b213-299f7af8940b}</Project>
+      <Name>TaskManager.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using PetaPoco;
 
-namespace QuartzExtention
+namespace TaskManager.Core.Entities
 {
-    public class TaskDetail
+    [Serializable]
+    [TableName("taskdetail")]
+    [PrimaryKey("id")]
+    public class TaskDetailEntity
     {
         ///<summary>
         ///获取规则指定部分
@@ -44,9 +45,9 @@ namespace QuartzExtention
         ///实例化实体
         ///</summary>
         ///<remarks>实例化实体时先根据taskName从数据库中获取，如果取不到则创建新实例</remarks>
-        public static TaskDetail New()
+        public static TaskDetailEntity New()
         {
-            return new TaskDetail();
+            return new TaskDetailEntity();
         }
 
         public string ClassType { get; set; }
@@ -70,54 +71,11 @@ namespace QuartzExtention
         public DateTime? NextStart { get; set; }
 
         public bool RunAtRestart { get; set; }
-
+        
         public RunAtServer RunAtServer { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public string TaskRule { get; set; }
-    }
-
-    public enum RulePart
-    {
-        ///<summary>
-        ///秒域
-        ///</summary>
-        Seconds,
-        ///<summary>
-        ///分钟域
-        ///</summary>
-        Minutes,
-        ///<summary>
-        ///小时域
-        ///</summary>
-        Hours,
-        ///<summary>
-        ///日期域
-        ///</summary>
-        Day,
-        ///<summary>
-        ///规则月部分 
-        ///</summary>
-        Mouth,
-        ///<summary>
-        ///规则星期域
-        ///</summary>
-        DayOfWeek
-    }
-
-    ///<summary>
-    ///任务在哪台服务器上运行
-    ///</summary>
-    public enum RunAtServer
-    {
-        ///<summary>
-        ///分布式环境下的集群服务器主控端
-        ///</summary>
-        Master,
-        ///<summary>
-        ///分布式环境下的集群服务器计算节点
-        ///</summary>
-        Slave
     }
 }
