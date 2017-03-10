@@ -14,6 +14,13 @@ namespace TaskManager.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/unobtrusive").Include(
+                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                       "~/Scripts/bootstrap-datetimepicker*"));
+            bundles.Add(new StyleBundle("~/Content/datetimepicker").Include(
+                     "~/Content/bootstrap-datetimepicker.css"));
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -26,6 +33,8 @@ namespace TaskManager.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/layer").Include(
+                      "~/Scripts/layer/layer.js"));
         }
     }
 }

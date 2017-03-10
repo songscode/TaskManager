@@ -7,8 +7,8 @@
     <ProjectGuid>{92CFDCA1-408C-4288-B5D1-6F614EEE9397}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaskManager.Core</RootNamespace>
-    <AssemblyName>TaskManager.Core</AssemblyName>
+    <RootNamespace>TaskManager.Task</RootNamespace>
+    <AssemblyName>TaskManager.Task</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

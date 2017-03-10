@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Core.Entities
+﻿namespace TaskManager.Task.Entities
 {
     public enum RulePart
     {

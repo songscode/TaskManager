@@ -1,4 +1,4 @@
-namespace TaskManager.Core
+namespace TaskManager.Task
 {
     public static class TaskSchedulerFactory
     {

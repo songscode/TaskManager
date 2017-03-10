@@ -1,10 +1,11 @@
 using System;
 using Common.Logging;
 using Quartz;
-using TaskManager.Core.Entities;
-using TaskManager.Core.Services;
+using TaskManager.Core;
+using TaskManager.Task.Entities;
+using TaskManager.Task.Services;
 
-namespace TaskManager.Core.Quartz
+namespace TaskManager.Task.Quartz
 {
     ///<summary>
     ///Quartz任务实现

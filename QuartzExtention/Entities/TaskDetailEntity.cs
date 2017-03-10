@@ -1,7 +1,7 @@
 ﻿using System;
 using PetaPoco;
 
-namespace TaskManager.Core.Entities
+namespace TaskManager.Task.Entities
 {
     [Serializable]
     [TableName("taskdetail")]

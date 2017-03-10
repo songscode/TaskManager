@@ -1,6 +1,6 @@
-using TaskManager.Core.Entities;
+using TaskManager.Task.Entities;
 
-namespace TaskManager.Core
+namespace TaskManager.Task
 {
     ///<summary>
     ///任务执行控制器

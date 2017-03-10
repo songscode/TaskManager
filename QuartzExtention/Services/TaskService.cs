@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using TaskManager.Core.Entities;
-using TaskManager.Core.Repositories;
+using TaskManager.Task.Entities;
+using TaskManager.Task.Repositories;
 
-namespace TaskManager.Core.Services
+namespace TaskManager.Task.Services
 {
     ///<summary>
     ///任务业务逻辑

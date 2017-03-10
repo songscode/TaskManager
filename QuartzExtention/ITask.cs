@@ -1,6 +1,6 @@
-using TaskManager.Core.Entities;
+using TaskManager.Task.Entities;
 
-namespace TaskManager.Core
+namespace TaskManager.Task
 {
     ///<summary>
     ///用于注册任务的接口

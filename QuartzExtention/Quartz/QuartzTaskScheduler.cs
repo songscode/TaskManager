@@ -4,10 +4,10 @@ using System.Linq;
 using Common.Logging;
 using Quartz;
 using Quartz.Impl;
-using TaskManager.Core.Entities;
-using TaskManager.Core.Services;
+using TaskManager.Task.Entities;
+using TaskManager.Task.Services;
 
-namespace TaskManager.Core.Quartz
+namespace TaskManager.Task.Quartz
 {
     ///<summary>
     ///用以管理Quartz任务调度相关的操作

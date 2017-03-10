@@ -1,9 +1,8 @@
-using MySql.Data.MySqlClient;
 using PetaPoco;
 using TaskManager.Common.PetaPoco;
-using TaskManager.Core.Entities;
+using TaskManager.Task.Entities;
 
-namespace TaskManager.Core.Repositories
+namespace TaskManager.Task.Repositories
 {
     ///<summary>
     ///TaskDetailRepository

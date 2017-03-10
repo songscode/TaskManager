@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Web", "TaskMana
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Web.Tests", "TaskManager.Web.Tests\TaskManager.Web.Tests.csproj", "{0FF5AF74-46AA-410B-B4AB-B04FD2E947BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Core", "QuartzExtention\TaskManager.Core.csproj", "{92CFDCA1-408C-4288-B5D1-6F614EEE9397}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Task", "QuartzExtention\TaskManager.Task.csproj", "{92CFDCA1-408C-4288-B5D1-6F614EEE9397}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Common", "TaskManager.Common\TaskManager.Common.csproj", "{47277686-11C1-4A3E-B213-299F7AF8940B}"
 EndProject
