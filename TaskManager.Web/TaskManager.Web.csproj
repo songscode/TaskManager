@@ -212,13 +212,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuartzExtention\TaskManager.Task.csproj">
-      <Project>{92cfdca1-408c-4288-b5d1-6f614eee9397}</Project>
-      <Name>TaskManager.Task</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TaskManager.Common\TaskManager.Common.csproj">
       <Project>{47277686-11c1-4a3e-b213-299f7af8940b}</Project>
       <Name>TaskManager.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskManager.Task\TaskManager.Task.csproj">
+      <Project>{92cfdca1-408c-4288-b5d1-6f614eee9397}</Project>
+      <Name>TaskManager.Task</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
