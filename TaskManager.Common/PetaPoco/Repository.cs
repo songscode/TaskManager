@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PetaPoco;
 
 namespace TaskManager.Common.PetaPoco
@@ -52,8 +53,8 @@ namespace TaskManager.Common.PetaPoco
 
         public IEnumerable<TEntity> GetAll(string orderBy)
         {
-            PocoData data = PocoData.ForType(typeof(TEntity),null);
-            Sql sql = Sql.Builder.Select(new object[] { data.TableInfo.PrimaryKey }).From(new object[] { data.TableInfo.TableName });
+            PocoData data = PocoData.ForType(typeof(TEntity), new StandardMapper());
+            Sql sql = Sql.Builder.Select(data.Columns.Select(e => e.Key).ToArray()).From(new object[] { data.TableInfo.TableName });
             if (!string.IsNullOrEmpty(orderBy))
             {
                 sql.OrderBy(new object[] { orderBy });

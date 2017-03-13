@@ -22,7 +22,10 @@ namespace TaskManager.Task.Quartz
         /// </summary>
         public QuartzTaskScheduler()
         {
-            //todo _taskDetails读取
+            if (_taskDetails == null)
+            {
+                _taskDetails = new TaskService().GetAll().ToList<TaskDetailEntity>();
+            }
         }
 
 

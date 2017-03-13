@@ -55,6 +55,23 @@ namespace TaskManager.Task.Services
             //更新任务
             this._taskDetailRepository.Update(entity);
         }
+        /// <summary>
+        /// 新增任务相关信息
+        /// </summary>
+        /// <param name="entity"></param>
+        public void Insert(TaskDetailEntity entity)
+        {
+            this._taskDetailRepository.Insert(entity);
+        }
+        /// <summary>
+        /// 修改启用的状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="enabled"></param>
+        public void ChangeEnabled(int id,bool enabled)
+        {
+            this._taskDetailRepository.ChangeEnabled(id,enabled);
+        }
     }
 }
 

@@ -1,12 +1,13 @@
 ﻿using System;
 using PetaPoco;
+using TaskManager.Common.PetaPoco;
 
 namespace TaskManager.Task.Entities
 {
     [Serializable]
     [TableName("taskdetail")]
     [PrimaryKey("id")]
-    public class TaskDetailEntity
+    public class TaskDetailEntity 
     {
         ///<summary>
         ///获取规则指定部分

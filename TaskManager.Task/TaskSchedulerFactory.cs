@@ -1,3 +1,5 @@
+using TaskManager.Common;
+
 namespace TaskManager.Task
 {
     public static class TaskSchedulerFactory
@@ -10,10 +12,10 @@ namespace TaskManager.Task
         ///<returns></returns>
         public static ITaskScheduler GetScheduler()
         {
-            //if (a == null)
-            //{
-            //    a = DIContainer.Resolve<ITaskScheduler>();
-            //}
+            if (_taskScheduler == null)
+            {
+                _taskScheduler = DIContainer.Resolve<ITaskScheduler>();
+            }
             return _taskScheduler;
         }
     }

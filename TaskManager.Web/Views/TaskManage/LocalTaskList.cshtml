@@ -3,14 +3,8 @@
     ViewBag.Title = "TaskDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using TaskManager.Task.Entities
 @model IList<TaskManager.Task.Entities.TaskDetailEntity>
-@helper GetTrClassByEnabled(bool enabled)
-{
-if (!enabled)
-{
-        @("warning")
-}
-}
 
 
 @helper ThisContent()
@@ -30,26 +24,15 @@ if (Model != null && Model.Any())
                     <th>下次开始时间</th>
                     <th>有效时间</th>
                     <th>是否启用</th>
-                    <th>操作</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var taskDetail in Model)
-        {
-                <tr class="@GetTrClassByEnabled(taskDetail.Enabled)">
-                    <td>@taskDetail.Name</td>
-                    <td>@taskDetail.ClassType</td>
-                    <td>@taskDetail.TaskRule</td>
-                    <td>@taskDetail.IsRunning</td>
-                    <td>@taskDetail.LastStart</td>
-                    <td>@taskDetail.LastEnd</td>
-                    <td>@taskDetail.LastIsSuccess</td>
-
-                    <td>@taskDetail.NextStart</td>
-                    <td>@(string.Format("{0}至{1}", taskDetail.StartDate.ToString("yyyy-M-d"), taskDetail.EndDate.HasValue ? taskDetail.EndDate.Value.ToString("yyyy-M-d") : "永久"))</td>
-                    <td>@taskDetail.Enabled</td>
-                    <td><a>编辑</a>|<a>详情</a>|<a>删除</a>|<a>启用</a>|<a>执行</a></td>
-                </tr>
+                {
+                    <tr>
+                        @Html.Partial("_TaskDetailRow", taskDetail)
+                    </tr>
                 }
             </tbody>
         </table>
@@ -62,24 +45,39 @@ if (Model != null && Model.Any())
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
     <script>
-        function openTaskAddOrEdit(id) {
+        $(".tm_AddOrEdit").click(function () {
+            var taskid = $(this).attr("taskid");
             var title = "编辑任务";
-            if (id == undefined) {
-                id = 0;
+            if (taskid == undefined) {
+                taskid = 0;
                 title = "新增任务";
             }
-            $.get("@(Url.Action("TaskDetailAddOrEdit"))", { id: id }, function (data) {
+            $.get("@(Url.Action("TaskDetailAddOrEdit"))", { id: taskid }, function (data) {
                 layer.open({
                     title: title,
                     type: 1,
                     content: data
                 });
             });
+        });
+
+        function changeEnabled(_this) {
+            var self = $(_this);
+            var taskid = self.attr("taskid");
+            var text = self.text();
+            var taskenabled = text == "启用";
+            var row = self.parents("tr");
+            $.post("@(Url.Action("ChangeEnabled"))", { id: taskid, enabled: taskenabled }, function (data) {
+                layer.alert("修改成功！");
+                row.html(data);
+            });
         }
     </script>
 }
 <div class="row">
-    <a onclick="openTaskAddOrEdit()">新建</a>
+    <div class="col-md-12">
+        <a class="tm_AddOrEdit btn btn-default">新建</a>
+    </div>
 </div>
 <div class="row">
     @ThisContent()
