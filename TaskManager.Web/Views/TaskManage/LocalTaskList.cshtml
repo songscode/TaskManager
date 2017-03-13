@@ -72,11 +72,22 @@ if (Model != null && Model.Any())
                 row.html(data);
             });
         }
+
+        function resumeAllTasks() {
+            $.post("@(Url.Action("ResumeAllTasks"))", function () {
+                layer.alert("重启成功！");
+            })
+    .error(function (obj) {
+        console.log(obj);
+        layer.alert(obj.statusText);
+    });
+        }
     </script>
 }
 <div class="row">
     <div class="col-md-12">
         <a class="tm_AddOrEdit btn btn-default">新建</a>
+        <a class="btn btn-default" onclick="resumeAllTasks()">重启所有任务</a>
     </div>
 </div>
 <div class="row">

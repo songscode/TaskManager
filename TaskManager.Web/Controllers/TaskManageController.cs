@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using TaskManager.Task;
@@ -92,10 +94,55 @@ namespace TaskManager.Web.Controllers
         [HttpPost]
         public ActionResult ResumeAllTasks()
         {
-            var taskScheduler = TaskSchedulerFactory.GetScheduler();
-            taskScheduler.ResumeAll();
-            var list = this._taskService.GetAll() as IList<TaskDetailEntity>;
-            return View("LocalTaskList", list);
+            try
+            {
+
+                var list = this._taskService.GetAll() as IList<TaskDetailEntity>;
+                //return View("LocalTaskList", list);
+                var taskScheduler = TaskSchedulerFactory.GetScheduler();
+                taskScheduler.ResumeAll();
+                return View("LocalTaskList", list);
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, StringToISO_8859_1(e.Message));
+            }
+        }
+
+        /// <summary>
+        /// 转换为ISO_8859_1
+        /// </summary>
+        /// <param name="srcText"></param>
+        /// <returns></returns>
+        private string StringToISO_8859_1(string srcText)
+        {
+            string dst = "";
+            char[] src = srcText.ToCharArray();
+            for (int i = 0; i < src.Length; i++)
+            {
+                string str = @"&#" + (int)src[i] + ";";
+                dst += str;
+            }
+            return dst;
+        }
+        /// <summary>
+        /// 转换为原始字符串
+        /// </summary>
+        /// <param name="srcText"></param>
+        /// <returns></returns>
+        private string ISO_8859_1ToString(string srcText)
+        {
+            string dst = "";
+            string[] src = srcText.Split(';');
+            for (int i = 0; i < src.Length; i++)
+            {
+                if (src[i].Length > 0)
+                {
+                    string str = ((char)int.Parse(src[i].Substring(2))).ToString();
+                    dst += str;
+                }
+            }
+            return dst;
         }
         #endregion
     }
