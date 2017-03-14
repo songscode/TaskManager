@@ -1,6 +1,8 @@
 using System;
 using Common.Logging;
 using Quartz;
+using TaskManager.Common.Log;
+using TaskManager.Common.Log.Entity;
 using TaskManager.Core;
 using TaskManager.Task.Entities;
 using TaskManager.Task.Services;
@@ -23,7 +25,7 @@ namespace TaskManager.Task.Quartz
             TaskDetailEntity task = TaskSchedulerFactory.GetScheduler().GetTask(@int);
             if (task == null)
             {
-                throw new ArgumentException("Not found task ：" + task.Name);
+                throw new ArgumentException("Not found task ：" + @int);
             }
             TaskService service = new TaskService();
             task.IsRunning = true;
@@ -36,7 +38,7 @@ namespace TaskManager.Task.Quartz
             }
             catch (Exception e)
             {
-                LogManager.GetLogger(this.GetType()).Error(message: string.Format("Exception while running job {0} of type {1}", context.JobDetail.Key, context.JobDetail.JobType.ToString()), exception: e);
+                LogHelper<TaskMonitorEntity>.Error(new TaskMonitorEntity {TaskId = task.Id,Message = string.Format("Exception while running job {0} of type {1}", context.JobDetail.Key, context.JobDetail.JobType.ToString()) },e);
                 task.LastIsSuccess = false;
             }
             task.IsRunning = false;

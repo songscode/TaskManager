@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DIContainer.cs" />
+    <Compile Include="Log\Entity\ILogEntity.cs" />
     <Compile Include="Log\Entity\TaskMonitorEntity.cs" />
     <Compile Include="Log\Log4NetPatternLayout.cs" />
     <Compile Include="Log\Log4NetPatternLayoutConverter.cs" />

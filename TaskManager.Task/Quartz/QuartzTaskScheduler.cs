@@ -4,6 +4,8 @@ using System.Linq;
 using Common.Logging;
 using Quartz;
 using Quartz.Impl;
+using TaskManager.Common.Log;
+using TaskManager.Common.Log.Entity;
 using TaskManager.Task.Entities;
 using TaskManager.Task.Services;
 
@@ -91,7 +93,7 @@ namespace TaskManager.Task.Quartz
                 Type type = Type.GetType(task.ClassType);
                 if (type == null)
                 {
-                    LogManager.GetLogger(this.GetType()).Error(message: string.Format("任务： {0} 的taskType为空。", task.Name));
+                    LogHelper<TaskMonitorEntity>.Error(new TaskMonitorEntity {TaskId =task.Id,Message = string.Format("任务： {0} 的taskType为空。", task.Name) });
                 }
                 else
                 {
@@ -104,7 +106,7 @@ namespace TaskManager.Task.Quartz
                         }
                         catch (Exception e)
                         {
-                            LogManager.GetLogger(this.GetType()).Error(message: string.Format("执行任务： {0} 出现异常。", task.Name), exception: e);
+                            LogHelper<TaskMonitorEntity>.Error(new TaskMonitorEntity { TaskId = task.Id, Message = string.Format("任务： {0} 的taskType为空。", task.Name) },e);
                         }
                     }
                 }

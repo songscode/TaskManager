@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
+using TaskManager.Common.Log.Entity;
 
 namespace TaskManager.Common.Log
 {
-    public class LogHelper<T> where T : class
+    public class LogHelper<T> where T :ILogEntity
     {
         public static ILog Logger { get { return LogManager.GetLogger(typeof(T)); } }
 
