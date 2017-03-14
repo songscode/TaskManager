@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Autofac;
 using Microsoft.Ajax.Utilities;
+using TaskManager.Common;
 using TaskManager.Task;
 using TaskManager.Task.Quartz;
 
@@ -14,7 +16,7 @@ namespace TaskManager.Web.App_Start
         public static void Start()
         {
             InitializeDIContainer();
-            InitializeApplication();
+            //InitializeApplication();
         }
 
         /// <summary>
@@ -24,6 +26,12 @@ namespace TaskManager.Web.App_Start
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Register(c => new QuartzTaskScheduler()).As<ITaskScheduler>().SingleInstance();
+
+            //containerBuilder.RegisterModule<Whitebox.Containers.Autofac.WhiteboxProfilingModule>();
+
+            IContainer container = containerBuilder.Build();
+            
+            DIContainer.RegisterContainer(container);
         }
 
         /// <summary>

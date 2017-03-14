@@ -40,7 +40,6 @@ if (Model != null && Model.Any())
 }
 
 @section scripts{
-    @Scripts.Render("~/bundles/layer")
     @Scripts.Render("~/bundles/unobtrusive")
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
@@ -67,20 +66,16 @@ if (Model != null && Model.Any())
             var text = self.text();
             var taskenabled = text == "启用";
             var row = self.parents("tr");
-            $.post("@(Url.Action("ChangeEnabled"))", { id: taskid, enabled: taskenabled }, function (data) {
+            $.myPost("@(Url.Action("ChangeEnabled"))", { id: taskid, enabled: taskenabled }, function (data) {
                 layer.alert("修改成功！");
                 row.html(data);
             });
         }
 
         function resumeAllTasks() {
-            $.post("@(Url.Action("ResumeAllTasks"))", function () {
+            $.myPost("@(Url.Action("ResumeAllTasks"))", function() {
                 layer.alert("重启成功！");
-            })
-    .error(function (obj) {
-        console.log(obj);
-        layer.alert(obj.statusText);
-    });
+            });
         }
     </script>
 }

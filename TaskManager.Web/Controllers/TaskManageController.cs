@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Common.Logging;
+using TaskManager.Common.Log;
+using TaskManager.Common.Log.Entity;
 using TaskManager.Task;
 using TaskManager.Task.Entities;
 using TaskManager.Task.Services;
+using TaskManager.Web.Filters;
 
 namespace TaskManager.Web.Controllers
 {
+    [ExceptionFilter]
     public class TaskManageController : Controller
     {
-        private TaskService _taskService=new TaskService();
-        
+        private TaskService _taskService = new TaskService();
+
         /// <summary>
         /// 任务列表
         /// </summary>
@@ -22,12 +28,13 @@ namespace TaskManager.Web.Controllers
         public ActionResult LocalTaskList()
         {
             var list = this._taskService.GetAll() as IList<TaskDetailEntity>;
+            //throw new Exception("异常测试");
             return View(list);
         }
 
-        public ActionResult TaskDetailAddOrEdit(int id=0)
+        public ActionResult TaskDetailAddOrEdit(int id = 0)
         {
-            TaskDetailEntity entity=new TaskDetailEntity();
+            TaskDetailEntity entity = new TaskDetailEntity();
             if (id > 0)
             {
                 entity = this._taskService.Get(id);
@@ -52,11 +59,11 @@ namespace TaskManager.Web.Controllers
                 {
                     this._taskService.Insert(entity);
                 }
-                return Json(new { st = 1,msg="保存成功！" });
+                return Json(new { st = 1, msg = "保存成功！" });
             }
             catch (Exception e)
             {
-                return Json(new { st = 0, msg = "保存失败，"+e.Message });
+                return Json(new { st = 0, msg = "保存失败，" + e.Message });
             }
         }
 
@@ -85,7 +92,7 @@ namespace TaskManager.Web.Controllers
         {
             var taskScheduler = TaskSchedulerFactory.GetScheduler();
             taskScheduler.Run(id);
-            return Json(new {st=1,msg="任务执行完成！"});
+            return Json(new { st = 1, msg = "任务执行完成！" });
         }
         /// <summary>
         /// 重启所有任务
@@ -96,53 +103,19 @@ namespace TaskManager.Web.Controllers
         {
             try
             {
-
-                var list = this._taskService.GetAll() as IList<TaskDetailEntity>;
-                //return View("LocalTaskList", list);
-                var taskScheduler = TaskSchedulerFactory.GetScheduler();
-                taskScheduler.ResumeAll();
-                return View("LocalTaskList", list);
+                throw new Exception("Exception测试");
             }
             catch (Exception e)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, StringToISO_8859_1(e.Message));
+                LogHelper<TaskMonitorEntity>.Error(new TaskMonitorEntity { TaskId = 1999, Message = "消息内容测试" }, e);
+                throw new Exception(typeof(TaskMonitorEntity).FullName + "系统错误测试");
             }
-        }
 
-        /// <summary>
-        /// 转换为ISO_8859_1
-        /// </summary>
-        /// <param name="srcText"></param>
-        /// <returns></returns>
-        private string StringToISO_8859_1(string srcText)
-        {
-            string dst = "";
-            char[] src = srcText.ToCharArray();
-            for (int i = 0; i < src.Length; i++)
-            {
-                string str = @"&#" + (int)src[i] + ";";
-                dst += str;
-            }
-            return dst;
-        }
-        /// <summary>
-        /// 转换为原始字符串
-        /// </summary>
-        /// <param name="srcText"></param>
-        /// <returns></returns>
-        private string ISO_8859_1ToString(string srcText)
-        {
-            string dst = "";
-            string[] src = srcText.Split(';');
-            for (int i = 0; i < src.Length; i++)
-            {
-                if (src[i].Length > 0)
-                {
-                    string str = ((char)int.Parse(src[i].Substring(2))).ToString();
-                    dst += str;
-                }
-            }
-            return dst;
+            return new EmptyResult();
+            var taskScheduler = TaskSchedulerFactory.GetScheduler();
+            taskScheduler.ResumeAll();
+            var list = this._taskService.GetAll() as IList<TaskDetailEntity>;
+            return View("LocalTaskList", list);
         }
         #endregion
     }
