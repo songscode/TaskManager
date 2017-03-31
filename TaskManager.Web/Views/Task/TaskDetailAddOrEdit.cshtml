@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TaskRule, "Quartz规则", htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.TaskRule, "Cron式子", htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @Html.EditorFor(model => model.TaskRule, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TaskRule, "", new { @class = "text-danger" })
@@ -72,7 +72,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-4 col-md-8">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="保存" class="btn btn-default"/>
+                <a class="btn btn-default" onclick="cancellayer()">取消</a>
+                <a class="btn btn-default" onclick="GetCronResult()">测试Cron</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12" id="runTime">
+                
             </div>
         </div>
     </div>
@@ -84,6 +91,26 @@
         if (data.st == 1) {
             layer.closeAll('page');
         }
+    }
+
+    function GetCronResult() {
+        var cronstr = $("input[name='TaskRule']").val();
+        $.myGet("@(Url.Action("GetTaskeFireTime","TaskManage"))", { cronExpression: cronstr },function(data) {
+            if (data && data.length == 5) {
+                var strHTML = "最近5次运行时间:<hr/><ul>";
+                for (var i = 0; i < data.length; i++) {
+                    strHTML += "<li>" + data[i] + "</li>";
+                }
+                strHTML += "</ul>"
+                $("#runTime").html(strHTML);
+            } else {
+                $("#runTime").html("");
+            }
+        });
+    }
+
+    function cancellayer() {
+        layer.closeAll('page');
     }
     $(".form_datetime").datetimepicker({
         format: "yyyy-mm-dd hh:ii"

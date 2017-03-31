@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
@@ -9,27 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("当前任务", "LocalTaskList", "TaskManage")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+    @Html.Partial("_Navbar")
+    <div class="container body-content" style="margin-top: 1em">
         @RenderBody()
         <hr />
         <footer>
@@ -40,21 +21,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/layer")
-<script>
-    //$.post扩展写法
-    $.myPost = function (url, data, fn) {
-        if (typeof (data) == "function") {
-            fn = data;
-            data = {};
-        }
-        var index = layer.load(2);
-        $.post(url, data, fn).error(function (obj) {
-            layer.alert(obj.statusText, { icon: 5 });
-        }).complete(function() {
-            layer.close(index);
-        });
-    }
-</script>
+    @Scripts.Render("~/bundles/common")
     @RenderSection("scripts", required: false)
 </body>
 </html>

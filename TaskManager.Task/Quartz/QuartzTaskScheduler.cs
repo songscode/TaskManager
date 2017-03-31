@@ -102,7 +102,7 @@ namespace TaskManager.Task.Quartz
                     {
                         try
                         {
-                            task2.Execute(null);
+                            task2.Execute(task);
                         }
                         catch (Exception e)
                         {

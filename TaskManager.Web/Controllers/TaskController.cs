@@ -7,6 +7,8 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Common.Logging;
+using Quartz;
+using Quartz.Spi;
 using TaskManager.Common.Log;
 using TaskManager.Common.Log.Entity;
 using TaskManager.Task;
@@ -17,7 +19,7 @@ using TaskManager.Web.Filters;
 namespace TaskManager.Web.Controllers
 {
     [ExceptionFilter]
-    public class TaskManageController : Controller
+    public class TaskController : Controller
     {
         private TaskService _taskService = new TaskService();
 
@@ -118,5 +120,27 @@ namespace TaskManager.Web.Controllers
             return View("LocalTaskList", list);
         }
         #endregion
+
+        public ActionResult QuartzCron()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 获取任务在未来周期内哪些时间会运行
+        /// </summary>
+        /// <param name="cronExpression">Cron表达式</param>
+        /// <returns></returns>
+        public ActionResult GetTaskeFireTime(string cronExpression)
+        {
+            //时间表达式
+            ITrigger trigger = TriggerBuilder.Create().WithCronSchedule(cronExpression).Build();
+            IList<DateTimeOffset> dates = TriggerUtils.ComputeFireTimes(trigger as IOperableTrigger, null, 5);
+            List<string> list = new List<string>();
+            foreach (DateTimeOffset dtf in dates)
+            {
+                list.Add(TimeZoneInfo.ConvertTimeFromUtc(dtf.DateTime, TimeZoneInfo.Local).ToString());
+            }
+            return Json(list,JsonRequestBehavior.AllowGet);
+        }
     }
 }

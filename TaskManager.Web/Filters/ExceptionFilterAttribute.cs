@@ -14,11 +14,20 @@ namespace TaskManager.Web.Filters
         {
             base.OnException(filterContext);
             var exception = filterContext.Exception;
-            LogHelper.SystemLog.Error(string.Format("系统异常：{0}",exception.Message),exception);
+            var errmsg = "";
+            if (exception.GetType() == typeof (FormatException))
+            {
+                errmsg = "格式错误：" + exception.Message;
+            }
+            else
+            {
+                errmsg = "内部异常：" + exception.Message;
+            }
+            LogHelper.SystemLog.Error(errmsg, exception);
             if (filterContext.Controller.ControllerContext.HttpContext.Request.IsAjaxRequest())
             {
                 filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.InternalServerError,
-                    StringToISO_8859_1("内部异常："+exception.Message));
+                    StringToISO_8859_1(errmsg));
             }
             else
             {

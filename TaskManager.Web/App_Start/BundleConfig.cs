@@ -19,6 +19,8 @@ namespace TaskManager.Web
 
             bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
                        "~/Scripts/bootstrap-datetimepicker*"));
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                       "~/Scripts/common.js"));
             bundles.Add(new StyleBundle("~/Content/datetimepicker").Include(
                      "~/Content/bootstrap-datetimepicker.css"));
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
@@ -35,6 +37,12 @@ namespace TaskManager.Web
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/layer").Include(
                       "~/Scripts/layer/layer.js"));
+            bundles.Add(new ScriptBundle("~/bundles/easyui").Include(
+                     "~/Scripts/easyui/jquery.easyui.min.js"));
+            bundles.Add(new StyleBundle("~/Content/easyui").Include(
+                    "~/Scripts/easyui/themes/bootstrap/easyui.min.css", "~/Scripts/easyui/themes/icon.css", "~/Scripts/easyui/icon.css"));
+            bundles.Add(new ScriptBundle("~/bundles/cron").Include(
+                     "~/Scripts/cron.js"));
         }
     }
 }
