@@ -43,6 +43,7 @@
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskExecutionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertySerializer.cs" />
     <Compile Include="TaskExecutionContextImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

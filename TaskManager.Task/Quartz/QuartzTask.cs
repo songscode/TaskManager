@@ -1,5 +1,6 @@
 using System;
 using Common.Logging;
+using Common.Task;
 using Quartz;
 using TaskManager.Common.Log;
 using TaskManager.Common.Log.Entity;

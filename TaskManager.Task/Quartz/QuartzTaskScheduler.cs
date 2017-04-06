@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using Common.Task;
 using Quartz;
 using Quartz.Impl;
 using TaskManager.Common.Log;

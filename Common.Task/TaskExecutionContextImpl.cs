@@ -8,27 +8,91 @@ namespace Common.Task
 {
     public class TaskExecutionContextImpl: ITaskExecutionContext
     {
-        private readonly IDictionary<object, object> _data = new Dictionary<object, object>();
+        private PropertySerializer _propertySerializer;
+        private string _propertyNames;
+        private string _propertyValues;
 
-        /// <summary>
-        /// 设定key对应的参数
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="objectValue"></param>
-        public virtual void Put(object key, object objectValue)
+        protected TaskExecutionContextImpl()
         {
-            _data[key] = objectValue;
+
         }
-        /// <summary>
-        /// 读取key对应的参数
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public virtual object Get(object key)
+
+        public void Serialize()
         {
-            object retValue;
-            _data.TryGetValue(key, out retValue);
-            return retValue;
+            this.PropertySerializer.Serialize(ref this._propertyNames, ref this._propertyValues);
         }
+
+        ///<summary>
+        ///获取propertyName指定的属性值
+        ///</summary>
+        ///<param name="propertyName">属性名称</param>
+        public T GetExtendedProperty<T>(string propertyName)
+        {
+            return this.PropertySerializer.GetExtendedProperty<T>(propertyName);
+        }
+
+        public T GetExtendedProperty<T>(string propertyName, T defaultValue)
+        {
+            return this.PropertySerializer.GetExtendedProperty<T>(propertyName, defaultValue);
+        }
+
+        ///<summary>
+        ///设置可序列化属性
+        ///</summary>
+        ///<param name="propertyName">属性名称</param>
+        ///<param name="propertyValue">属性值</param>
+        public void SetExtendedProperty(string propertyName, object propertyValue)
+        {
+            this.PropertySerializer.SetExtendedProperty(propertyName, propertyValue);
+        }
+
+        ///<summary>
+        ///序列化属性名称字符串
+        ///</summary>
+        ///<remarks>
+        ///保留该属性的目的是通过orm存取数据库的数据
+        ///</remarks>
+        public string PropertyNames
+        {
+            get
+            {
+                return this._propertyNames;
+            }
+            protected set
+            {
+                this._propertyNames = value;
+            }
+        }
+
+        protected PropertySerializer PropertySerializer
+        {
+            get
+            {
+                if (this._propertySerializer == null)
+                {
+                    this._propertySerializer = new PropertySerializer(this.PropertyNames, this.PropertyValues);
+                }
+                return this._propertySerializer;
+            }
+        }
+
+        ///<summary>
+        ///序列化属性值字符串
+        ///</summary>
+        ///<remarks>
+        ///保留该属性的目的是通过orm存取数据库的数据
+        ///</remarks>
+        public string PropertyValues
+        {
+            get
+            {
+                return this._propertyValues;
+            }
+            protected set
+            {
+                this._propertyValues = value;
+            }
+        }
+
     }
 }

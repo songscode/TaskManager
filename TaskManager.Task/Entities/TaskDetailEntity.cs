@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using Common.Task;
 using PetaPoco;
 using TaskManager.Common.PetaPoco;
 
@@ -7,7 +9,7 @@ namespace TaskManager.Task.Entities
     [Serializable]
     [TableName("taskdetail")]
     [PrimaryKey("id")]
-    public class TaskDetailEntity 
+    public class TaskDetailEntity : TaskExecutionContextImpl
     {
         ///<summary>
         ///获取规则指定部分
@@ -41,7 +43,15 @@ namespace TaskManager.Task.Entities
             }
             return str;
         }
-
+        /// <summary>
+        /// 扩展属性
+        /// </summary>
+        [Ignore]
+        public NameValueCollection ExtendedProperties
+        {
+            get { return this.PropertySerializer.Properties; }
+            set { this.PropertySerializer.SetNameValueCollection(value); }
+        }
         ///<summary>
         ///实例化实体
         ///</summary>
@@ -72,7 +82,7 @@ namespace TaskManager.Task.Entities
         public DateTime? NextStart { get; set; }
 
         public bool RunAtRestart { get; set; }
-        
+
         public RunAtServer RunAtServer { get; set; }
 
         public DateTime StartDate { get; set; }
