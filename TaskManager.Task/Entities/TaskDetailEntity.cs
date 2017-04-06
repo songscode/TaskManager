@@ -49,8 +49,8 @@ namespace TaskManager.Task.Entities
         [Ignore]
         public NameValueCollection ExtendedProperties
         {
-            get { return this.PropertySerializer.Properties; }
-            set { this.PropertySerializer.SetNameValueCollection(value); }
+            get { return this.PropertySerializer().Properties; }
+            set { this.PropertySerializer().SetNameValueCollection(value); }
         }
         ///<summary>
         ///实例化实体

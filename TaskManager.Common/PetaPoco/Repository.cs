@@ -54,7 +54,7 @@ namespace TaskManager.Common.PetaPoco
         public IEnumerable<TEntity> GetAll(string orderBy)
         {
             PocoData data = PocoData.ForType(typeof(TEntity), new StandardMapper());
-            Sql sql = Sql.Builder.Select(data.Columns.Select(e => e.Key).ToArray()).From(new object[] { data.TableInfo.TableName });
+            Sql sql = Sql.Builder.Select(data.Columns.Where(e=>!e.Key.Contains("PropertySerializer")).Select(e => e.Key).ToArray()).From(new object[] { data.TableInfo.TableName });
             if (!string.IsNullOrEmpty(orderBy))
             {
                 sql.OrderBy(new object[] { orderBy });

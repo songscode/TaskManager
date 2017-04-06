@@ -44,21 +44,22 @@ if (Model != null && Model.Any())
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
     <script>
-        $(".tm_AddOrEdit").click(function () {
-            var taskid = $(this).attr("taskid");
+      
+        function addOrEdit(_this) {
+            var taskid = $(_this).attr("taskid");
             var title = "编辑任务";
             if (taskid == undefined) {
                 taskid = 0;
                 title = "新增任务";
             }
             $.get("@(Url.Action("TaskDetailAddOrEdit"))", { id: taskid }, function (data) {
-                layer.open({
-                    title: title,
-                    type: 1,
-                    content: data
-                });
+            layer.open({
+                title: title,
+                type: 1,
+                content: data
             });
         });
+        }
 
         function changeEnabled(_this) {
             var self = $(_this);
@@ -82,7 +83,7 @@ if (Model != null && Model.Any())
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default tm_AddOrEdit">新建任务</button>
+            <button type="button" class="btn btn-default" onclick="addOrEdit(this)">新建任务</button>
             <button type="button" class="btn btn-default" onclick="resumeAllTasks()">重启任务</button>
         </div>
     </div>

@@ -19,7 +19,7 @@ namespace Common.Task
 
         public void Serialize()
         {
-            this.PropertySerializer.Serialize(ref this._propertyNames, ref this._propertyValues);
+            this.PropertySerializer().Serialize(ref this._propertyNames, ref this._propertyValues);
         }
 
         ///<summary>
@@ -28,12 +28,12 @@ namespace Common.Task
         ///<param name="propertyName">属性名称</param>
         public T GetExtendedProperty<T>(string propertyName)
         {
-            return this.PropertySerializer.GetExtendedProperty<T>(propertyName);
+            return this.PropertySerializer().GetExtendedProperty<T>(propertyName);
         }
 
         public T GetExtendedProperty<T>(string propertyName, T defaultValue)
         {
-            return this.PropertySerializer.GetExtendedProperty<T>(propertyName, defaultValue);
+            return this.PropertySerializer().GetExtendedProperty<T>(propertyName, defaultValue);
         }
 
         ///<summary>
@@ -43,7 +43,7 @@ namespace Common.Task
         ///<param name="propertyValue">属性值</param>
         public void SetExtendedProperty(string propertyName, object propertyValue)
         {
-            this.PropertySerializer.SetExtendedProperty(propertyName, propertyValue);
+            this.PropertySerializer().SetExtendedProperty(propertyName, propertyValue);
         }
 
         ///<summary>
@@ -63,17 +63,14 @@ namespace Common.Task
                 this._propertyNames = value;
             }
         }
-
-        protected PropertySerializer PropertySerializer
+        
+        protected PropertySerializer PropertySerializer()
         {
-            get
-            {
                 if (this._propertySerializer == null)
                 {
                     this._propertySerializer = new PropertySerializer(this.PropertyNames, this.PropertyValues);
                 }
                 return this._propertySerializer;
-            }
         }
 
         ///<summary>

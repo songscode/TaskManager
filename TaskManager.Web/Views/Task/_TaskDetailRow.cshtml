@@ -21,7 +21,7 @@
             <li><a taskid="@(Model.Id)" onclick="changeEnabled(this)">@(Model.Enabled?"禁用":"启用")</a></li>
             <li role="separator" class="divider"></li>
             <li><a>删除</a></li>
-            <li><a class="tm_AddOrEdit" taskid="@Model.Id">编辑</a></li>
+            <li><a onclick="addOrEdit(this)" taskid="@Model.Id">编辑</a></li>
         </ul>
     </div>
 </td>

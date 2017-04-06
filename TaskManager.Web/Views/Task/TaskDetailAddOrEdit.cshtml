@@ -95,7 +95,7 @@
 
     function GetCronResult() {
         var cronstr = $("input[name='TaskRule']").val();
-        $.myGet("@(Url.Action("GetTaskeFireTime","TaskManage"))", { cronExpression: cronstr },function(data) {
+        $.myGet("@(Url.Action("GetTaskeFireTime","Task"))", { cronExpression: cronstr },function(data) {
             if (data && data.length == 5) {
                 var strHTML = "最近5次运行时间:<hr/><ul>";
                 for (var i = 0; i < data.length; i++) {
@@ -113,6 +113,6 @@
         layer.closeAll('page');
     }
     $(".form_datetime").datetimepicker({
-        format: "yyyy-mm-dd hh:ii"
+        format: "yyyy/m/d h:i:ss"
     });
 </script>
